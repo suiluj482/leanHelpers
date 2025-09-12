@@ -5,10 +5,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: ./src
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,3 +12,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: "src"
