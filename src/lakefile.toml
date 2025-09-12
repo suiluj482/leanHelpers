@@ -1,14 +1,14 @@
-name = "importTools"
+name = "leanHelpers"
 version = "0.1.0"
-defaultTargets = ["import-tools", "import-graph"]
+defaultTargets = ["lean-helpers", "import-graph"]
 
 [[lean_lib]]
-name = "ImportTools"
+name = "LeanHelpers"
 
 [[lean_exe]]
-name = "import-tools"
+name = "lean-helpers"
 root = "Main"
 
 [[lean_exe]]
 name = "import-graph"
-root = "ImportTools.ImportGraph"
+root = "LeanHelpers.ImportGraph"
