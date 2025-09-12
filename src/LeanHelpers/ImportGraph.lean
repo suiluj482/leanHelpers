@@ -63,5 +63,5 @@ def main(args: List String): IO Unit :=
   let out  := args.getD 1 "out.dot"
   genImportGraph' path out
 
-#eval return (← getGraph (mkFilePath ["."])).print
-#eval return (←(mkFilePath ["."]).walkDir).filter (λ path:FilePath => path.extension.map (·=="lean") |>.getD false)
+-- #eval return (← getGraph (mkFilePath ["."])).print
+-- #eval return (←(mkFilePath ["."]).walkDir).filter (λ path:FilePath => path.extension.map (·=="lean") |>.getD false)

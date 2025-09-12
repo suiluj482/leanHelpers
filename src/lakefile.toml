@@ -1,6 +1,6 @@
 name = "leanHelpers"
 version = "0.1.0"
-defaultTargets = ["lean-helpers", "import-graph"]
+defaultTargets = ["lean-helpers", "import-graph", "gen-all"]
 
 [[lean_lib]]
 name = "LeanHelpers"
@@ -12,3 +12,7 @@ root = "Main"
 [[lean_exe]]
 name = "import-graph"
 root = "LeanHelpers.ImportGraph"
+
+[[lean_exe]]
+name = "gen-all"
+root = "LeanHelpers.GenAll"
