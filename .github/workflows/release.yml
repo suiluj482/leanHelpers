@@ -31,7 +31,5 @@ jobs:
       # 4. Upload as release artifact
       - name: Upload release artifact
         uses: softprops/action-gh-release@v2
-        with:
-          files: result
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
