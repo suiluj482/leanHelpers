@@ -1,0 +1,14 @@
+name = "importTools"
+version = "0.1.0"
+defaultTargets = ["import-tools", "import-graph"]
+
+[[lean_lib]]
+name = "ImportTools"
+
+[[lean_exe]]
+name = "import-tools"
+root = "Main"
+
+[[lean_exe]]
+name = "import-graph"
+root = "ImportTools.ImportGraph"
