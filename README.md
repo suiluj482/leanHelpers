@@ -1,14 +1,6 @@
 # leanHelpers
 
-## build
-The helpers are written in Lean and build with nix
-'''
-nix build
-'''
-
-This results in executeables under result/bin/
-
-## helpers
+## features
 
 ### import graph
 In big projects which file imports which (especially for testing) can get confusing. This small skript will help by generating a .dot file of the import structure that can be rendered using graphviz.
@@ -25,3 +17,11 @@ dot -Tpng out.dot -o out.png
 In big projects you often want to import all files of a directory. Lean doesn't yet have a buildin function for this. 
 So this skript will look throuhg the project, and replace the content of every All.lean file with imports to all files in its directory.
 -- work in progress
+
+## build
+The helpers are written in Lean and build with nix
+'''
+nix build
+'''
+
+This results in executeables under result/bin/
