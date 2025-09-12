@@ -18,7 +18,9 @@ dot -Tpng out.dot -o out.png
 ### generate All.lean files
 In big projects you often want to import all files of a directory. Lean doesn't yet have a buildin function for this. 
 So this skript will look throuhg the project, and replace the content of every All.lean file with imports to all files in its directory.
--- work in progress
+'''
+gen-all projectSrcDir
+'''
 
 ## build
 The helpers are written in Lean and build with nix
