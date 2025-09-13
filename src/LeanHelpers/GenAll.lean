@@ -28,7 +28,6 @@ partial def genAll(path: FilePath)(pre: String): IO Unit := do
       |>.splitOn pSep
       |>.drop 1
       |>.foldl (s!"{·}{pSep}{·}") ""
-      |>.drop pSep.length
     IO.FS.writeFile allFile.path (content ++ "\n" ++ persistendContent)
 
   -- update subdirectories if they arent hidden
