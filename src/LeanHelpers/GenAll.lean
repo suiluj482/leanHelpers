@@ -14,7 +14,7 @@ partial def genAll(path: FilePath)(pre: String): IO Unit := do
     let extension := ".lean"
     let content := files
       |>.map    (·.fileName)
-      |>.filter (λ f => f.endsWith  extension ∧ f≠"All.lean")
+      |>.filter (λ f => f.endsWith  extension ∧ f≠"All.lean" ∧ !f.startsWith "-" ∧ !f.startsWith ".")
       |>.map    (·.dropRight extension.length
                 |>.replace "/" ".")
       |>.map    (s!"import {pre}.{·}")
@@ -23,7 +23,7 @@ partial def genAll(path: FilePath)(pre: String): IO Unit := do
     IO.FS.writeFile allFile.path content
 
   -- update subdirectories if they arent hidden
-  let _ ← files.filter (! ·.fileName.startsWith ".")
+  let _ ← files.filter (λ f => !(f.fileName.startsWith "." ∨ f.fileName.startsWith "-"))
     |>.mapM (λ f => genAll f.path (
       s!"{pre}{if pre.isEmpty then "" else "."}{f.fileName}"
     ))
