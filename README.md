@@ -1,5 +1,8 @@
 # leanHelpers
 
+> Unrelated Tip: 
+Did you know you can lock tab groups in vscode, so that new tabs don't open in it? I find this very usefull when having the lean infoview open on the side.
+
 ## features
 
 ### import graph
