@@ -10,10 +10,10 @@ permissions:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        system: [x86_64-linux, aarch64-linux, x86_64-darwin]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       # 1. Checkout the repo
@@ -30,19 +30,17 @@ jobs:
 
       # 3. Build your flake
       - name: Build flake
-        run: |
-          echo "Building for system: ${{ matrix.system }}"
-          nix build --system ${{ matrix.system }}
+        run: nix build
 
       # 4. Zip the build result
       - name: Zip build result
         run: |
-          zip -r "result-${{ matrix.system }}.zip" result
+          zip -r "result-${{ matrix.os }}.zip" result
 
       # 5. Upload as release artifact
       - name: Upload release artifact
         uses: softprops/action-gh-release@v2
         with:
-          files: "result-${{ matrix.system }}.zip"
+          files: "result-${{ matrix.os }}.zip"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
