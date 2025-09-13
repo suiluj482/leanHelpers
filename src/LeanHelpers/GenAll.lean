@@ -3,6 +3,8 @@ import Std
 open System
 open Std
 
+-- todo: subfolders All files?
+
 partial def genAll(path: FilePath)(pre: String): IO Unit := do
   if !(←path.isDir) then pure () else
   let files ← path.readDir
@@ -20,7 +22,14 @@ partial def genAll(path: FilePath)(pre: String): IO Unit := do
       |>.map    (s!"import {pre}.{·}")
       |>.foldl  (s!"{·}\n{·}") ""
       |>.drop 1
-    IO.FS.writeFile allFile.path content
+    let prevContent ← (←(IO.FS.Handle.mk allFile.path IO.FS.Mode.read)).readToEnd
+    let pSep := "---" -- persistend Seperator
+    let persistendContent := prevContent
+      |>.splitOn pSep
+      |>.drop 1
+      |>.foldl (s!"{·}{pSep}{·}") ""
+      |>.drop pSep.length
+    IO.FS.writeFile allFile.path (content ++ "\n" ++ persistendContent)
 
   -- update subdirectories if they arent hidden
   let _ ← files.filter (λ f => !(f.fileName.startsWith "." ∨ f.fileName.startsWith "-"))
