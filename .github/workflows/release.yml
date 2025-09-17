@@ -20,27 +20,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      # 2. Install Nix with flake support
-      - name: Install Nix
-        uses: cachix/install-nix-action@v31
+      # 2. Build
+      - name: Build
+        uses: leanprover/lean-action@v1
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
-          extra_nix_config: |
-            experimental-features = nix-command flakes
+          lake-package-directory: "src"
 
-      # 3. Build your flake
-      - name: Build flake
-        run: nix build
-
-      # 4. Zip the build result
+      # 3. Zip the build result
       - name: Zip build result
         run: |
-          zip -r "result-${{ matrix.os }}.zip" result
+          zip -r "build-${{ matrix.os }}.zip" src/.lake/build
 
-      # 5. Upload as release artifact
+      # 4. Upload as release artifact
       - name: Upload release artifact
         uses: softprops/action-gh-release@v2
         with:
-          files: "result-${{ matrix.os }}.zip"
+          files: "build-${{ matrix.os }}.zip"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
