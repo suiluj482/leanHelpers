@@ -20,8 +20,9 @@ dot -Tpng out.dot -o out.png
 
 ### generate All.lean files
 In big projects you often want to import all files of a directory. Lean doesn't yet have a buildin function for this. 
-So this skript will look throuhg the project, and replace the content of every All.lean file with imports to all files in its directory. 
-It will ignore files and directories starting with a '.' or '-'. It will also let content in an All.lean behind a "---" persist.
+So this skript will look throuhg the project and in it all All.lean files it finds it will add imports for all files in the current directory and all All.lean in a immediate subdirectory.
+It will put this imports at the top of the file. Leaving everything behind a "---" in the file as is. It will also keep commented out imports commented out.
+It will also ignore files and directories starting with a '.' or '-'.
 ```
 gen-all projectSrcDir
 ```
