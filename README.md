@@ -11,7 +11,7 @@ Did you know you can lock tab groups in vscode, so that new tabs don't open in i
 In big projects which file imports which (especially for testing) can get confusing. This small skript will help by generating a .dot file of the import structure that can be rendered using graphviz.
 To generate the .dot file
 ```
-import-tools projectSrcDir out.dot
+import-graph projectSrcDir out.dot
 ```
 Using graphviz to generate an image
 ```
