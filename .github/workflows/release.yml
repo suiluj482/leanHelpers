@@ -27,10 +27,18 @@ jobs:
           lake-package-directory: "src"
 
       # 3. Zip the build result
-      - name: Zip build result
+      - name: Zip build result (Linux / macOS)
+        if: runner.os != 'Windows'
         run: |
           cd src/.lake/build
-          zip -r "../../../build-${{ matrix.os }}.zip" .
+          zip -r "${{ github.workspace }}/build-${{ matrix.os }}.zip" .
+
+      - name: Zip build result (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          cd src\.lake\build
+          Compress-Archive -Path * -DestinationPath "${{ github.workspace }}\build-${{ matrix.os }}.zip"
 
       # 4. Upload as release artifact
       - name: Upload release artifact
